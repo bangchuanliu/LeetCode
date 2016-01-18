@@ -81,4 +81,33 @@ public class MinimumSizeSubarraySum {
 		return Math.min(end-front, Math.min(left, right));
 	}
 	
+	 public int minSubArrayLen3(int s, int[] nums) {
+	        if (nums == null || nums.length == 0) {
+	            return 0;
+	        }
+	        
+	        int minLen = 0;
+	        int sum = 0;
+	        
+	        int start = 0;
+	        int end = 0;
+	        while (end < nums.length) {
+	           sum += nums[end]; 
+	           while (start <= end && sum >= s) {
+	               minLen = Math.min(minLen, end - start + 1);
+	               sum -= nums[start];
+	               start++;
+	           }
+	           end++;
+	        }
+	        
+	        return minLen;
+	    }
+	 
+	 public static void main(String[] args) {
+		 MinimumSizeSubarraySum instance = new MinimumSizeSubarraySum();
+		 int[] nums = {1,4,4};
+		 System.out.println(instance.minSubArrayLen3(4, nums));
+	 }
+	
 }

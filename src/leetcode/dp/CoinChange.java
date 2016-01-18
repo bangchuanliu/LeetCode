@@ -8,53 +8,27 @@ import java.util.Arrays;
  */
 public class CoinChange {
 
+	
+	// dp[i + coins[j]] = Math.min(dp[i + coins[j]], dp[i] + 1)
+	
 	public int coinChange(int[] coins, int amount) {
-
 		if (coins == null || coins.length == 0 || amount <= 0) {
 			return 0;
 		}
 
-		Arrays.sort(coins);
-
-		if (amount < coins[0]) {
-			return -1;
-		}
-
-		int[] sums = new int[amount + 1];
-
-		for (int i = 0; i < coins[0]; i++) {
-			sums[i] = -1;
-		}
-
+		int[] sum = new int[amount+1];
+		Arrays.fill(sum, Integer.MAX_VALUE);
+		sum[0] = 0;
+		
 		for (int coin : coins) {
-			if (coin > amount) {
-				break;
-			}
-			sums[coin] = 1;
-		}
-
-		for (int i = coins[0] + 1; i <= amount; i++) {
-			if (sums[i] == 1) {
-				continue;
-			}
-			int min = Integer.MAX_VALUE;
-			for (int coin : coins) {
-				if (i > coin) {
-					if (sums[i - coin] != -1) {
-						min = Math.min(min, sums[i - coin] + 1);
-						sums[i] = min;
-					} 
-				} else {
-					break;
+			for (int i = coin; i <= amount; i++) {
+				if (sum[i - coin] != Integer.MAX_VALUE) {
+					sum[i] = Math.min(sum[i], sum[i-coin] + 1);
 				}
 			}
-			
-			if (sums[i] == 0) {
-				sums[i] = - 1;
-			}
 		}
 
-		return sums[amount];
+		return sum[amount] == Integer.MAX_VALUE ? -1 : sum[amount];
 	}
 	
 	public static void main(String[] args) {

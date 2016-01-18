@@ -1,5 +1,10 @@
 package leetcode.arraystring;
 
+
+/**
+ * 
+ * @author bliu13 Jan 17, 2016
+ */
 public class BulbSwitcher {
 	public int bulbSwitch(int n) {
 		if (n <= 0) {
