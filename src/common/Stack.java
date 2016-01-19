@@ -1,6 +1,4 @@
-package leetcode.stackqueue;
-
-import common.ListNode;
+package common;
 
 public class Stack {
 	ListNode top = null;

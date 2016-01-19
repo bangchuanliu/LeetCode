@@ -1,5 +1,7 @@
 package leetcode.stackqueue;
 
+import common.Stack;
+
 class MinStack {
 	
 	private Stack stack = new Stack();
