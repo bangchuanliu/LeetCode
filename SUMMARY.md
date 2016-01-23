@@ -1,5 +1,5 @@
 # Summary
 
 * [Introduction](introduction.md)
-* ArrayString
+* [ArrayString](arraystring.md)
 
