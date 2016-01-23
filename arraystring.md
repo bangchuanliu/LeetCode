@@ -1,2 +1,3 @@
-# 1. ArrayString
+# Chapter 1: ArrayString
+
 
