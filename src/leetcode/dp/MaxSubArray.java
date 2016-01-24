@@ -35,16 +35,12 @@ public class MaxSubArray {
 			return 0;
 		}
 
-		if (nums.length == 1) {
-			return nums[0];
-		}
+		int sum = 0;
+		int max = Integer.MIN_VALUE;
 
-		int sum = nums[0];
-		int max = nums[0];
-		
-		for (int i = 1; i < nums.length; i++) {
-			sum = Math.max(nums[i], sum + nums[i]);
-			max = Math.max(sum, max);
+		for (int num : nums) {
+			sum = Math.max(sum + num, num);
+			max = Math.max(max, sum);
 		}
 
 		return max;

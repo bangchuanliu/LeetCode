@@ -2,6 +2,16 @@ package leetcode.math;
 
 public class MissingNumber {
 	public int missingNumber(int[] nums) {
-		return 0;  // TODO
+		if (nums == null || nums.length == 0) {
+			return 0;
+		}
+
+		int sum = 0;
+
+		for (int num : nums) {
+			sum += num;
+		}
+		int n = nums.length;
+		return n * (n + 1) / 2 - sum;
 	}
 }

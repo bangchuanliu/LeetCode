@@ -13,10 +13,10 @@ public class ProductofArrayExceptSelf {
 			result[i] = nums[i - 1] * result[i - 1];
 		}
 
-		int p = 1;
+		int prod = 1;
 		for (int i = nums.length - 2; i >= 0; i--) {
-			p = p * nums[i + 1];
-			result[i] *= p;
+			prod = prod * nums[i + 1];
+			result[i] *= prod;
 		}
 
 		return result;

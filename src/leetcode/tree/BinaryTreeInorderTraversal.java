@@ -2,8 +2,8 @@ package leetcode.tree;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 import common.TreeNode;
 
@@ -34,16 +34,16 @@ public class BinaryTreeInorderTraversal {
 		if(root == null){
 			return result;
 		}
-		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+		Stack<TreeNode> stack = new Stack<>();
 		TreeNode p = root;
 		while(!stack.isEmpty() || p!= null){
 			if(p != null){
 				stack.push(p);
 				p = p.left;
 			}else{
-				TreeNode temp = stack.pop();
-				result.add(temp.val);
-				p = temp.right;
+				TreeNode cur = stack.pop();
+				result.add(cur.val);
+				p = cur.right;
 			}
 		}
 		return result;

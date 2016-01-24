@@ -1,27 +1,20 @@
 package leetcode.tree;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 import common.TreeNode;
 
 /**
- *  Given a binary tree, return the preorder traversal of its nodes' values.
-
-	For example:
-	Given binary tree {1,#,2,3},
-	   1
-	    \
-	     2
-	    /
-	   3
-	return [1,2,3].
-	
-	Note: Recursive solution is trivial, could you do it iteratively?
+ * Given a binary tree, return the preorder traversal of its nodes' values.
  * 
- * @author BangChuan Liu 
- * @date   2015
+ * For example: Given binary tree {1,#,2,3}, 1 \ 2 / 3 return [1,2,3].
+ * 
+ * Note: Recursive solution is trivial, could you do it iteratively?
+ * 
+ * @author BangChuan Liu
+ * @date 2015
  * @Contact liubangchuan1100@gmail.com
  */
 public class BinaryTreePreorderTraversal {
@@ -31,7 +24,7 @@ public class BinaryTreePreorderTraversal {
 		if (root == null) {
 			return list;
 		}
-		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
 		stack.push(root);
 		while (!stack.isEmpty()) {
 			TreeNode node = stack.pop();
