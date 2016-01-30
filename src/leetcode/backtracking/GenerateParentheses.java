@@ -16,11 +16,11 @@ public class GenerateParentheses {
 			return parentheses;
 		}
 
-		dfs(parentheses, n, n, "");
+		generateParenthesis(parentheses, n, n, "");
 		return parentheses;
 	}
 
-	public void dfs(List<String> parentheses, int left, int right, String s) {
+	public void generateParenthesis(List<String> parentheses, int left, int right, String s) {
 		if (left > right) {
 			return;
 		}
@@ -30,15 +30,11 @@ public class GenerateParentheses {
 		}
 
 		if (left > 0) {
-			dfs(parentheses, left - 1, right, s + "(");
+			generateParenthesis(parentheses, left - 1, right, s + "(");
 		}
 
 		if (right > 0) {
-			dfs(parentheses, left, right - 1, s + ")");
+			generateParenthesis(parentheses, left, right - 1, s + ")");
 		}
-	}
-
-	public static void main(String[] args) {
-		
 	}
 }

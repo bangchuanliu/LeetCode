@@ -15,9 +15,9 @@ public class SingleNumberII {
 
 			for (int num : nums) {
 				if (isBit1(num, i)) {
-					count++;
-				}
+				count++;
 			}
+		}
 
 			result |= (count % 3) << i;
 		}
