@@ -5,7 +5,6 @@ import common.ListNode;
 public class SwapNodesinPairs {
 
 	public ListNode swapPairs(ListNode head) {
-
 		if (head == null || head.next == null) {
 			return head;
 		}
@@ -16,14 +15,11 @@ public class SwapNodesinPairs {
 
 		while (cur != null && cur.next != null) {
 			ListNode next = cur.next;
-
 			cur.next = next.next;
 			next.next = cur;
-
 			if (pre != null) {
 				pre.next = next;
 			}
-
 			pre = cur;
 			cur = cur.next;
 		}

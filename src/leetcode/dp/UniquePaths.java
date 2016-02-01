@@ -5,15 +5,6 @@ package leetcode.dp;
  * @author bliu13 Jan 6, 2016
  */
 public class UniquePaths {
-	
-	public int uniquePaths2(int m, int n) {
-		if (m <= 0 || n <=0 ) {
-			return 0;
-		}
-		
-		return uniquePaths(m-1,n) + uniquePaths(m,n-1);
-	}
-	
 	public int uniquePaths(int m, int n) {
 		if (m <= 0 || n <=0 ) {
 			return 0;

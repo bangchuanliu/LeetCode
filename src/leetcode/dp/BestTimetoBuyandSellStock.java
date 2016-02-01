@@ -15,30 +15,30 @@ If you were only permitted to complete at most one transaction (ie, buy one and 
  * @Contact liubangchuan1100@gmail.com
  */
 public class BestTimetoBuyandSellStock {
-	
-	public int maxProfit(List<Integer> prices) {
-		if(prices == null || prices.size() == 0){
+
+	public int maxProfit(int[] prices) {
+		if (prices == null || prices.length == 0) {
 			return 0;
 		}
-		int min = Integer.MAX_VALUE;
+
+		int minPrice = prices[0];
 		int profit = 0;
-		for(int i=0;i<prices.size();i++){
-			min = Math.min(prices.get(i), min);
-			profit = Math.max(profit, prices.get(i) - min);
+		for (int i = 1; i < prices.length; i++) {
+			minPrice = Math.min(minPrice, prices[i]);
+			profit = Math.max(profit, prices[i] - minPrice);
 		}
+
 		return profit;
 	}
 	
 	public static void main(String[] args){
 		BestTimetoBuyandSellStock instance = new BestTimetoBuyandSellStock();
-		Integer[] a1 = {2,7,6,0}; //5
-		Integer[] a2 = {2,2,2,2}; //0
-		Integer[] a3 = {1,2,3,4}; //3
-		List<Integer> prices = new ArrayList<Integer>(Arrays.asList(a1));
-		System.out.println(instance.maxProfit(prices));
-		prices = new ArrayList<Integer>(Arrays.asList(a2));
-		System.out.println(instance.maxProfit(prices));
-		prices = new ArrayList<Integer>(Arrays.asList(a3));
-		System.out.println(instance.maxProfit(prices));
+		int[] a1 = {2,7,6,0}; //5
+		int[] a2 = {2,2,2,2}; //0
+		int[] a3 = {1,2,3,4}; //3
+
+		System.out.println(instance.maxProfit(a1));
+		System.out.println(instance.maxProfit(a2));
+		System.out.println(instance.maxProfit(a2));
 	}
 }

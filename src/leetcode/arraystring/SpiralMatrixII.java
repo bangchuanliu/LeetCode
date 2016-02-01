@@ -24,33 +24,32 @@ public class SpiralMatrixII {
 		if (n <= 0) {
 			return new int[0][0];
 		}
-		int[][] result = new int[n][n];
+		int[][] matrix = new int[n][n];
 		int x = 0;
 		int y = 0;
 		int count = 1;
 		while (n > 0) {
 			if (n == 1) {
-				result[x][y] = count;
-				break;
+				matrix[x][y] = count;
 			}
 
 			for (int i = 0; i < n - 1; i++) {
-				result[x][y++] = count++;
+				matrix[x][y++] = count++;
 			}
 			for (int i = 0; i < n - 1; i++) {
-				result[x++][y] = count++;
+				matrix[x++][y] = count++;
 			}
 			for (int i = 0; i < n - 1; i++) {
-				result[x][y--] = count++;
+				matrix[x][y--] = count++;
 			}
 			for (int i = 0; i < n - 1; i++) {
-				result[x--][y] = count++;
+				matrix[x--][y] = count++;
 			}
 			n -= 2;
 			x++;
 			y++;
 		}
-		return result;
+		return matrix;
 	}
 
 	public static void main(String[] args){
