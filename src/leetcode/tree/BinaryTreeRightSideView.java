@@ -21,12 +21,10 @@ public class BinaryTreeRightSideView {
 		
 		while (!nodesQ.isEmpty()) {
 			int size = nodesQ.size();
-			
+			values.add(nodesQ.peek().val);
 			for (int i = 0; i < size; i++) {
 				TreeNode node = nodesQ.poll();
-				if (i == 0) {
-					values.add(node.val);
-				}
+				
 				if (node.right != null) {
 					nodesQ.add(node.right);
 				} 

@@ -5,30 +5,35 @@ import java.util.Stack;
 import common.TreeNode;
 
 public class BinarySearchTreeIterator {
-	Stack<TreeNode> stack;
+	Stack<TreeNode> stack = new Stack<>();
 
 	public BinarySearchTreeIterator(TreeNode root) {
-		stack = new Stack<TreeNode>();
-		while (root != null) {
-			stack.push(root);
-			root = root.left;
-		}
-	}
+	        TreeNode p = root;
+	        if (root != null) {
+	            while (p != null) {
+	                stack.push(p);
+	                p = p.left;
+	            }
+	        }
+	    }
 
+	/** @return whether we have a next smallest number */
 	public boolean hasNext() {
 		return !stack.isEmpty();
 	}
 
+	/** @return the next smallest number */
 	public int next() {
-		TreeNode node = stack.pop();
-		int result = node.val;
-		if (node.right != null) {
-			node = node.right;
-			while (node != null) {
-				stack.push(node);
-				node = node.left;
+		if (!stack.isEmpty()) {
+			TreeNode node = stack.pop();
+			TreeNode p = node.right;
+			while (p != null) {
+				stack.push(p);
+				p = p.left;
 			}
+			return node.val;
+		} else {
+			return 0;
 		}
-		return result;
 	}
 }
