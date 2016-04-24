@@ -5,20 +5,6 @@ package leetcode.binarysearch;
  * @author bliu13 Jan 11, 2016
  */
 public class PowXn {
-	public double myPow2(double x, int n) {
-		if (x == 0) {
-			return 1;
-		}
-
-		int m = Math.abs(n);
-		double prod = x;
-		for (int i = 2; i <= m; i++) {
-			prod *= x;
-		}
-
-		return n < 0 ? 1.0 / prod : prod;
-	}
-	
 	/**
 	 * Binary search
 	 * @param x
@@ -49,6 +35,6 @@ public class PowXn {
 	
 	public static void main(String[] args) {
 		PowXn instance = new PowXn();
-		System.out.println(instance.myPow(0.00001,2147483647));
+		System.out.println(instance.myPow(2,8));
 	}
 }

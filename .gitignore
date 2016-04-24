@@ -1,5 +1,5 @@
 /bin/
-/out/
+out/
 .DS_Store
 src/.DS_Store
 leetcode.iml

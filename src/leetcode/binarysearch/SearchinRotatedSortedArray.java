@@ -28,7 +28,7 @@ public class SearchinRotatedSortedArray {
 				return mid;
 			}
 			
-			if (nums[left] <= nums[mid]) {
+			if (nums[left] < nums[mid]) {
 				if (target < nums[mid] && target >= nums[left]) {
 					right = mid - 1;
 				} else {
@@ -44,30 +44,5 @@ public class SearchinRotatedSortedArray {
 		}
 
 		return -1;
-	}
-	
-	
-	//
-	
-	{
-//		if (nums[mid] < target) {
-//		if (nums[left] <= nums[right] || nums[left] <= nums[mid]) {
-//			left = mid + 1;
-//		} else if (nums[right] >= target) {
-//			left = mid + 1;
-//		} else {
-//			right = mid - 1;
-//		}
-//	} else if (nums[mid] > target) {
-//		if (nums[left] <= nums[right] || nums[left] >= nums[mid]) {
-//			right = mid - 1;
-//		} else if (nums[left] <= target) {
-//			right = mid - 1;
-//		} else {
-//			left = mid + 1;
-//		}
-//	} else {
-//		return mid;
-//	}
 	}
 }

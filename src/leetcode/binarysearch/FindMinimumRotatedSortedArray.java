@@ -1,34 +1,6 @@
 package leetcode.binarysearch;
 
 public class FindMinimumRotatedSortedArray {
-	public int findMin2(int[] num) {
-		if (num == null || num.length == 0) {
-			return 0;
-		}
-		if (num.length == 1) {
-			return num[0];
-		}
-		if (num.length == 2) {
-			return Math.min(num[0], num[1]);
-		}
-		int i = 0;
-		int j = num.length - 1;
-		while (i < j) {
-			int k = (i + j) / 2;
-			if (k > 0 && num[k] < num[k - 1]) {
-				return num[k];
-			} else if (k < num.length - 1 && num[k] > num[k + 1]) {
-				return num[k + 1];
-			} else {
-				if (num[k] > num[j]) {
-					i = k + 1;
-				} else {
-					j = k - 1;
-				}
-			}
-		}
-		return num[i];
-	}
 
 	public int findMin(int[] nums) {
 		if (nums == null || nums.length == 0) {
@@ -38,19 +10,16 @@ public class FindMinimumRotatedSortedArray {
 		int left = 0;
 		int right = nums.length - 1;
 
-		while (left <= right) {
-			if (nums[left] <= nums[right]) {
-				return nums[left];
-			}
+		while (left < right) {
 			int mid = (left + right) / 2;
-			if (nums[left] <= nums[mid]) {
-				left = mid + 1;
+			if (nums[mid] < nums[right]) {
+				right = mid;
 			} else {
-				left++;
+				left = mid + 1;
 			}
 		}
 
-		return 0;
+		return nums[right];
 	}
 
 	public static void main(String[] args) {

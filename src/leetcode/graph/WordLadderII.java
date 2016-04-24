@@ -3,9 +3,10 @@ package leetcode.graph;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -26,74 +27,128 @@ import java.util.Set;
  * @Contact liubangchuan1100@gmail.com
  */
 public class WordLadderII {
-
 	static int dis = Integer.MAX_VALUE;
 
-	public List<List<String>> findLadders(String beginWord, String endWord, Set<String> wordList) {
-
-		List<List<String>> result = new ArrayList<List<String>>();
-
-		if (beginWord == null || endWord == null || wordList == null) {
+	public List<List<String>> findLadders1(String beginWord, String endWord, Set<String> wordList) {
+		List<List<String>> result = new ArrayList<>();
+		if (beginWord == null || endWord == null || wordList == null || beginWord.equals(endWord)) {
 			return result;
 		}
 
-		wordList.add(endWord);
+		Queue<String> words = new LinkedList<>();
 		List<String> temp = new ArrayList<>();
-		LinkedList<String> queue = new LinkedList<>();
-		queue.add(beginWord);
 
-		findLadders(queue, endWord, wordList, result, temp);
+		words.add(beginWord);
+		wordList.add(endWord);
 
-		result.removeIf(list -> list.size() > dis);
+		findLadders2(words, result, endWord, wordList, temp);
+
+		Iterator<List<String>> ite = result.iterator();
+		while (ite.hasNext()) {
+			List<String> path = ite.next();
+			if (path.size() > dis) {
+				ite.remove();
+			}
+		}
 
 		return result;
 	}
 
-	public void findLadders(LinkedList<String> queue, String endWord, Set<String> wordList, List<List<String>> result,
+	public void findLadders2(Queue<String> words, List<List<String>> result, String endWord, Set<String> wordList,
 			List<String> temp) {
-
-		if (queue.isEmpty()) {
-			return;
-		}
-
-		while (!queue.isEmpty()) {
-			String word = queue.poll();
-
+		while (!words.isEmpty()) {
+			String word = words.poll();
 			if (word.equals(endWord)) {
+				result.add(new ArrayList<>(temp));
 				dis = Math.min(temp.size(), dis);
-				result.add(new ArrayList<String>(temp));
-				continue;
-			}
-
-			for (int i = 0; i < endWord.length(); i++) {
-				for (char c = 'a'; c <= 'z'; c++) {
-					char[] words = word.toCharArray();
-
-					if (words[i] == c) {
-						continue;
-					}
-
-					words[i] = c;
-					String newWord = new String(words);
-
-					if (wordList.contains(newWord)) {
-						queue.add(newWord);
-						temp.add(newWord);
-						wordList.remove(newWord);
-						if (temp.size() <= dis) {
-							findLadders(queue, endWord, wordList, result, temp);
+			} else {
+				for (int i = 0; i < word.length(); i++) {
+					for (char c = 'a'; c <= 'z'; c++) {
+						char[] chars = word.toCharArray();
+						if (chars[i] == c) {
+							continue;
 						}
-						wordList.add(newWord);
-						temp.remove(temp.size() - 1);
+						chars[i] = c;
+						String tempStr = new String(chars);
+						if (wordList.contains(tempStr)) {
+							words.add(tempStr);
+							temp.add(tempStr);
+							wordList.remove(tempStr);
+							findLadders2(words, result, endWord, wordList, temp);
+							temp.remove(temp.size() - 1);
+							wordList.add(tempStr);
+						}
 					}
 				}
 			}
 		}
 	}
 
+	
+	// only find one
+	public List<List<String>> findLadders(String beginWord, String endWord, Set<String> wordList) {
+		List<List<String>> result = new ArrayList<>();
+		if (beginWord == null || endWord == null || wordList == null || beginWord.equals(endWord)) {
+			return result;
+		}
+
+		Queue<String> words = new LinkedList<>();
+		List<String> temp = new ArrayList<>();
+
+		words.add(beginWord);
+		wordList.add(beginWord);
+		wordList.add(endWord);
+
+		while (!words.isEmpty()) {
+			String word = words.poll();
+			if (word.equals(endWord)) {
+				result.add(new ArrayList<>(temp));
+				dis = Math.min(temp.size(), dis);
+			} else {
+				for (int i = 0; i < word.length(); i++) {
+					for (char c = 'a'; c <= 'z'; c++) {
+						char[] chars = word.toCharArray();
+						if (chars[i] == c) {
+							continue;
+						}
+						chars[i] = c;
+						String tempStr = new String(chars);
+						if (wordList.contains(tempStr)) {
+							words.add(tempStr);
+							temp.add(tempStr);
+							wordList.remove(tempStr);
+							findLadders2(words, result, endWord, wordList, temp);
+							temp.remove(temp.size() - 1);
+							wordList.add(tempStr);
+						}
+					}
+				}
+			}
+		}
+
+		Iterator<List<String>> ite = result.iterator();
+		while (ite.hasNext()) {
+			List<String> path = ite.next();
+			if (path.size() > dis) {
+				ite.remove();
+			}
+		}
+
+		return result;
+	}
+	
+	
+	
+	
+	
 	public static void main(String[] args) {
 		WordLadderII instance = new WordLadderII();
-		String[] wordLists = {"si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","tm","le","av","sm","ar","ci","ca","br","ti","ba","to","ra","fa","yo","ow","sn","ya","cr","po","fe","ho","ma","re","or","rn","au","ur","rh","sr","tc","lt","lo","as","fr","nb","yb","if","pb","ge","th","pm","rb","sh","co","ga","li","ha","hz","no","bi","di","hi","qa","pi","os","uh","wm","an","me","mo","na","la","st","er","sc","ne","mn","mi","am","ex","pt","io","be","fm","ta","tb","ni","mr","pa","he","lr","sq","ye"};
+		String[] wordLists = { "si", "go", "se", "cm", "so", "ph", "mt", "db", "mb", "sb", "kr", "ln", "tm", "le", "av",
+				"sm", "ar", "ci", "ca", "br", "ti", "ba", "to", "ra", "fa", "yo", "ow", "sn", "ya", "cr", "po", "fe",
+				"ho", "ma", "re", "or", "rn", "au", "ur", "rh", "sr", "tc", "lt", "lo", "as", "fr", "nb", "yb", "if",
+				"pb", "ge", "th", "pm", "rb", "sh", "co", "ga", "li", "ha", "hz", "no", "bi", "di", "hi", "qa", "pi",
+				"os", "uh", "wm", "an", "me", "mo", "na", "la", "st", "er", "sc", "ne", "mn", "mi", "am", "ex", "pt",
+				"io", "be", "fm", "ta", "tb", "ni", "mr", "pa", "he", "lr", "sq", "ye" };
 		Set<String> wordList = new HashSet<String>(Arrays.asList(wordLists));
 		List<List<String>> result = instance.findLadders("qa", "sq", wordList);
 		System.out.println(Arrays.deepToString(result.toArray()));

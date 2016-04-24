@@ -33,17 +33,16 @@ import java.util.Set;
 public class WordLadder {
 	public int ladderLength(String beginWord, String endWord,
 			Set<String> wordList) {
-	    
         if (beginWord == null || endWord == null || wordList == null || beginWord.equals(endWord)) {
             return 0;
         }
         
         LinkedList<String> wordQ = new LinkedList<>();
         LinkedList<Integer> distanceQ = new LinkedList<>();
-        int result = Integer.MAX_VALUE;
-        
         wordQ.add(beginWord);
         distanceQ.add(1);
+        
+        int result = Integer.MAX_VALUE;
         
         while (!wordQ.isEmpty()) {
             String word = wordQ.poll();
@@ -56,14 +55,11 @@ public class WordLadder {
             for (int i = 0; i < beginWord.length(); i++) {
                 for (char c = 'a'; c <= 'z'; c++) {
                     char[] words = word.toCharArray();
-                    
                     if (words[i] == c) {
                         continue;
                     }
-                    
                     words[i] = c;
                     String temp = new String(words);
-                    
                     if (wordList.contains(temp)) {
                         wordQ.add(temp);
                         distanceQ.add(dis+1);

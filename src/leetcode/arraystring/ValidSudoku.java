@@ -12,11 +12,9 @@ package leetcode.arraystring;
  */
 public class ValidSudoku {
 	public boolean isValidSudoku(char[][] board) {
-
 		if (board == null || board.length != board[0].length || board.length != 9) {
 			return false;
 		}
-
 		int len = board.length;
 
 		for (int i = 0; i < len; i++) {
@@ -57,7 +55,6 @@ public class ValidSudoku {
 				}
 			}
 		}
-
 		return true;
 	}
 
