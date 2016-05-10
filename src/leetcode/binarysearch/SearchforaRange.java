@@ -7,43 +7,6 @@ package leetcode.binarysearch;
 public class SearchforaRange {
 
 	public int[] searchRange(int[] nums, int target) {
-
-		if (nums == null || nums.length == 0) {
-			return new int[0];
-		}
-
-		int start = 0;
-		int end = nums.length - 1;
-		int[] result = new int[2];
-		while (start <= end) {
-			int mid = end - (end - start) / 2;
-
-			if (nums[mid] > target) {
-				end = mid - 1;
-			} else if (nums[mid] < target) {
-				start = mid + 1;
-			} else {
-				int left = mid;
-				int right = mid;
-				while (left >= 0 && nums[left] == target) {
-					left--;
-				}
-
-				while (right < nums.length && nums[right] == target) {
-					right++;
-				}
-
-				result[0] = left + 1;
-				result[1] = right - 1;
-				return result;
-			}
-		}
-		result[0] = -1;
-		result[1] = -1;
-		return result;
-	}
-	
-	public int[] searchRange2(int[] nums, int target) {
 		if (nums == null || nums.length == 0) {
 			return new int[0];
 		}
@@ -91,7 +54,6 @@ public class SearchforaRange {
 		instance.searchRange(nums, 0);
 		System.out.println(System.currentTimeMillis() - start);
 		start = System.currentTimeMillis();
-		instance.searchRange2(nums, 0);
 		System.out.println(System.currentTimeMillis() - start);
 	}
 }

@@ -22,6 +22,7 @@ public class TwoSum {
 			if (numsMap.containsKey(nums[i])) {
 				index[0] = numsMap.get(nums[i]);
 				index[1] = i + 1;
+				return index;
 			} else {
 				numsMap.put(target - nums[i], i + 1);
 			}

@@ -43,7 +43,40 @@ public class RepeatedDNASequences {
 
 		return result;
 	}
-	
+
+	public List<String> findRepeatedDnaSequences2(String s) {
+		List<String> list = new ArrayList<>();
+		if (s == null || s.length() <= 10) {
+			return list;
+		}
+
+		Map<String, Integer> map = new HashMap<>();
+
+		int i = 0;
+		StringBuilder sb = new StringBuilder();
+		for (; i < 10; i++) {
+			sb.append(s.charAt(i));
+		}
+		map.put(sb.toString(), 1);
+		while (i < s.length()) {
+			sb.deleteCharAt(0);
+			sb.append(s.charAt(i));
+			if (map.containsKey(sb.toString())) {
+				map.put(sb.toString(), map.get(sb.toString()) + 1);
+			} else {
+				map.put(sb.toString(), 1);
+			}
+			i++;
+		}
+
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			if (entry.getValue() > 1) {
+				list.add(entry.getKey());
+			}
+		}
+		return list;
+	}
+
 	public static void main(String[] args) {
 		RepeatedDNASequences instance = new RepeatedDNASequences();
 		instance.findRepeatedDnaSequences("CAAAAAAAAAC");

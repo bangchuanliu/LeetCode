@@ -1,34 +1,43 @@
 package leetcode.stackqueue;
 
-import java.util.LinkedList;
+import java.util.Stack;
 
 public class EvaluateReversePolishNotation {
-	private LinkedList<String> stack = new LinkedList<String>();
-
 	public int evalRPN(String[] tokens) {
 		if (tokens == null || tokens.length == 0) {
 			return 0;
 		}
-		for (String s : tokens) {
-			if (s.equals("+") || s.equals("-") || s.equals("*")
-					|| s.equals("/")) {
-				int b = Integer.parseInt(stack.pop());
-				int a = Integer.parseInt(stack.pop());
-				int c = 0;
-				if (s.equals("+")) {
-					c = a + b;
-				} else if (s.equals("-")) {
-					c = a - b;
-				} else if (s.equals("*")) {
-					c = a * b;
-				} else {
-					c = a / b;
-				}
-				stack.push(String.valueOf(c));
+
+		Stack<Integer> stack = new Stack<>();
+
+		for (String token : tokens) {
+			if (isOperator(token)) {
+				int b = stack.pop();
+				int a = stack.pop();
+				stack.push(calculate(a, b, token));
 			} else {
-				stack.push(s);
+				stack.push(Integer.parseInt(token));
 			}
 		}
-		return Integer.parseInt(stack.pop());
+
+		return stack.pop();
+	}
+
+	public boolean isOperator(String token) {
+		return token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/");
+	}
+
+	public int calculate(int a, int b, String operator) {
+		switch (operator) {
+		case "+":
+			return a + b;
+		case "-":
+			return a - b;
+		case "*":
+			return a * b;
+		case "/":
+			return a / b;
+		}
+		return 0;
 	}
 }
