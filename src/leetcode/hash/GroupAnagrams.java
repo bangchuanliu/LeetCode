@@ -2,7 +2,6 @@ package leetcode.hash;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,13 +13,13 @@ import java.util.Map;
 public class GroupAnagrams {
 	public List<List<String>> groupAnagrams(String[] strs) {
 		List<List<String>> result = new ArrayList<>();
-		
+
 		if (strs == null || strs.length == 0) {
 			return result;
 		}
-		
+		Arrays.sort(strs);
 		Map<String, List<String>> map = new HashMap<>();
-		
+
 		for (String str : strs) {
 			char[] strChars = str.toCharArray();
 			Arrays.sort(strChars);
@@ -33,9 +32,9 @@ public class GroupAnagrams {
 				map.put(newStr, strList);
 			}
 		}
-		
+
 		result.addAll(map.values());
-		
+
 		return result;
 	}
 }

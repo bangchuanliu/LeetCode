@@ -1,10 +1,5 @@
 package leetcode.dp;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * Say you have an array for which the ith element is the price of a given stock on day i.
 

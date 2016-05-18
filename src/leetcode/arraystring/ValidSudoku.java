@@ -1,5 +1,8 @@
 package leetcode.arraystring;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Determine if a Sudoku is valid, according to: Sudoku Puzzles - The Rules.
  * 
@@ -15,41 +18,43 @@ public class ValidSudoku {
 		if (board == null || board.length != board[0].length || board.length != 9) {
 			return false;
 		}
-		int len = board.length;
+		int length = board.length;
+		Set<Character> set = new HashSet<>();
 
-		for (int i = 0; i < len; i++) {
-			boolean[] u1 = new boolean[len + 1];
-			boolean[] u2 = new boolean[len + 1];
-			for (int j = 0; j < len; j++) {
+		for (int i = 0; i < length; i++) {
+			set.clear();
+			for (int j = 0; j < length; j++) {
 				if (board[i][j] != '.') {
-					if (u1[board[i][j] - '0']) {
+					if (set.contains(board[i][j])) {
 						return false;
-					} else {
-						u1[board[i][j] - '0'] = true;
 					}
-				}
-
-				if (board[j][i] != '.') {
-					if (u2[board[j][i] - '0']) {
-						return false;
-					} else {
-						u2[board[j][i] - '0'] = true;
-					}
+					set.add(board[i][j]);
 				}
 			}
 		}
 
-		for (int i = 0; i < len; i = i + 3) {
-			for (int j = 0; j < len; j = j + 3) {
-				boolean[] u = new boolean[len + 1];
+		for (int i = 0; i < length; i++) {
+			set.clear();
+			for (int j = 0; j < length; j++) {
+				if (board[j][i] != '.') {
+					if (set.contains(board[j][i])) {
+						return false;
+					}
+					set.add(board[j][i]);
+				}
+			}
+		}
+
+		for (int i = 0; i < length; i += 3) {
+			for (int j = 0; j < length; j += 3) {
+				set.clear();
 				for (int m = i; m < i + 3; m++) {
 					for (int n = j; n < j + 3; n++) {
 						if (board[m][n] != '.') {
-							if (u[board[m][n] - '0']) {
+							if (set.contains(board[m][n])) {
 								return false;
-							} else {
-								u[board[m][n] - '0'] = true;
 							}
+							set.add(board[m][n]);
 						}
 					}
 				}

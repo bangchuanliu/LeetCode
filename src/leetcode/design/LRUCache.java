@@ -5,75 +5,67 @@ import java.util.Map;
 
 public class LRUCache<K, V> {
 
-	private Map<K, Node<K, V>> map = new HashMap<>();
+	private Map<K, Node<K, V>> cache;
 	private Node<K, V> head;
 	private Node<K, V> tail;
 	private int capacity;
 
 	public LRUCache(int capacity) {
 		this.capacity = capacity;
+		cache = new HashMap<>(capacity);
 	}
 
 	public V get(K key) {
-		if (map.containsKey(key)) {
-			Node<K, V> node = map.get(key);
+		if (cache.containsKey(key)) {
+			Node<K, V> node = cache.get(key);
 			removeNode(node);
 			setHead(node);
-			return map.get(key).value;
+			return node.value;
 		}
-
 		return null;
 	}
 
-	public void removeNode(Node<K,V> node) {
-		if (node != null) {
-			if (node.pre != null) {
-				node.pre.next = node.next;
-			} else {
-				head = node.next;
-			}
+	public void removeNode(Node<K, V> node) {
+		if (node == head) {
+			head = head.next;
+		} else {
+			node.pre.next = node.next;
+		}
 
-			if (node.next != null) {
-				node.next.pre = node.pre;
-			} else {
-				tail = node.pre;
-			}
+		if (node == tail) {
+			tail = tail.pre;
+		} else {
+			node.next.pre = node.pre;
 		}
 	}
 
-	public void setHead(Node<K,V> node) {
-		if (node != null) {
-			node.next = head;
-			node.pre = null;
-
-			if (head != null) {
-				head.pre = node;
-			}
-
-			head = node;
-
-			if (tail == null) {
-				tail = head;
-			}
+	public void setHead(Node<K, V> node) {
+		node.next = head;
+		if (head != null) {
+			head.pre = node;
 		}
+
+		if (tail == null) {
+			tail = node;
+		}
+
+		head = node;
 	}
 
 	public void set(K key, V value) {
-
-		if (map.containsKey(key)) {
-			Node<K,V> node = map.get(key);
+		if (cache.containsKey(key)) {
+			Node<K, V> node = cache.get(key);
 			node.value = value;
 			removeNode(node);
 			setHead(node);
 		} else {
-			Node<K,V> node = new Node<K,V>(key, value);
-
-			if (map.size() == capacity) {
-				map.remove(tail.key);
+			if (cache.size() == capacity) {
+				cache.remove(tail.key);
 				removeNode(tail);
 			}
+			Node<K, V> node = new Node<K, V>(key, value);
 			setHead(node);
-			map.put(key, node);
+			cache.put(key, node);
 		}
 	}
 
