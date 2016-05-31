@@ -4,3 +4,7 @@ out/
 src/.DS_Store
 leetcode.iml
 .gitignore
+.classpath
+.project
+.idea/
+.idea
