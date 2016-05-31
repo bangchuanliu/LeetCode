@@ -56,7 +56,7 @@ public class WordLadderII {
 
 	public void findLadders2(Queue<String> words, List<List<String>> result, String endWord, Set<String> wordList,
 			List<String> temp) {
-		while (!words.isEmpty()) {
+		if (!words.isEmpty()) {
 			String word = words.poll();
 			if (word.equals(endWord)) {
 				result.add(new ArrayList<>(temp));

@@ -1,29 +1,6 @@
 package leetcode.backtracking;
 
 public class WildcardMatching {
-	public boolean isMatch2(String s, String p) {
-		if (s == null && p == null || s.length() == 0 && p.length() == 0) {
-			return true;
-		}
-
-		if ((s != null && s.length() > 0) && (p != null && p.length() > 0)) {
-			if (s.equals(p) || p.equals("*") || (s.length() == 1 && p.equals("?"))) {
-				return true;
-			}
-
-			if (s.charAt(0) == p.charAt(0) || p.charAt(0) == '?') {
-				return isMatch(s.substring(1), p.substring(1));
-			} else if (p.charAt(0) == '*') {
-				for (int i = 1; i < s.length(); i++) {
-					if (isMatch(s.substring(i), p.substring(1))) {
-						return true;
-					}
-				}
-			}
-		}
-
-		return false;
-	}
 
 	public boolean isMatch(String s, String p) {
 		int i = 0;
@@ -47,7 +24,7 @@ public class WildcardMatching {
 			}
 		}
 
-		while (j < p.length() && p.charAt(j) == '*') {
+		while (j < p.length() && (p.charAt(j) == '*' || p.charAt(j) == '?')) {
 			j++;
 		}
 
@@ -64,5 +41,6 @@ public class WildcardMatching {
 		System.out.println(instance.isMatch("ab", "?*"));
 		System.out.println(instance.isMatch("aab", "c*a*b"));
 		System.out.println(instance.isMatch("abefcdgiescdfimde", "ab*cd?i*de"));
+		System.out.println(instance.isMatch("abefcdg", "ab*g***?*"));
 	}
 }

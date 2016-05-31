@@ -23,10 +23,10 @@ public class SudokuSolver {
 				}
 				board[i][j] = '.';
 			}
+			return false;
 		} else {
 			return helper(board, i, j + 1);
 		}
-		return false;
 	}
 
 	public boolean isValid(char[][] board, int i, int j) {

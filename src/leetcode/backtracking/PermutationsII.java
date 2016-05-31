@@ -21,7 +21,7 @@ public class PermutationsII {
 
 		return result;
 	}
-	
+
 	public void permute(List<List<Integer>> result, boolean[] used, int[] nums, List<Integer> temp) {
 
 		if (temp.size() == nums.length) {
@@ -29,7 +29,7 @@ public class PermutationsII {
 			return;
 		}
 
-		int lastNumber = Integer.MAX_VALUE;
+		long lastNumber = Long.MAX_VALUE;
 
 		for (int i = 0; i < nums.length; i++) {
 			if (!used[i] && nums[i] != lastNumber) {
@@ -44,7 +44,7 @@ public class PermutationsII {
 	}
 
 	public static void main(String[] args) {
-		int[] nums = { 1, 1, 2 };
+		int[] nums = {1, 1, 2};
 		PermutationsII instance = new PermutationsII();
 		List<List<Integer>> result = instance.permuteUnique(nums);
 		System.out.println(Arrays.toString(result.toArray()));

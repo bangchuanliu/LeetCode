@@ -6,21 +6,22 @@ import java.util.List;
 
 public class PascalTriangleII {
 	public List<Integer> getRow(int rowIndex) {
-		List<Integer> row = new ArrayList<>();
-		if (rowIndex < 0) {
-			return row;
-		}
-		row.add(1);
-		int i = 0;
-		while (i < rowIndex) {
-			row.add(1);
+		List<Integer> list = new ArrayList<>(rowIndex + 1);
 
-			for (int j = i; j > 0; j--) {
-				row.set(j, row.get(j) + row.get(j - 1));
-			}
-			i++;
+		if (rowIndex < 0) {
+			return list;
 		}
-		return row;
+
+		list.add(1);
+
+		for (int i = 1; i <= rowIndex; i++) {
+			list.add(1);
+			for (int j = i - 1; j > 0; j--) {
+				int temp = list.get(j) + list.get(j - 1);
+				list.set(j, temp);
+			}
+		}
+		return list;
 	}
 
 	public static void main(String[] args) {
