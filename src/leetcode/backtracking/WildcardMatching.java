@@ -24,7 +24,7 @@ public class WildcardMatching {
 			}
 		}
 
-		while (j < p.length() && (p.charAt(j) == '*' || p.charAt(j) == '?')) {
+		while (j < p.length() && (p.charAt(j) == '*')) {
 			j++;
 		}
 
