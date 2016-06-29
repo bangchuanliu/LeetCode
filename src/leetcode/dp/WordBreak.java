@@ -20,29 +20,6 @@ import java.util.Set;
  * @Contact liubangchuan1100@gmail.com
  */
 public class WordBreak {
-	/**
-	 * naive solution
-	 * 
-	 * @param s
-	 * @param dict
-	 * @return
-	 */
-	public boolean wordBreakNaive(String s, Set<String> dict) {
-		if (s == null || s.trim().length() == 0 || dict == null || dict.size() == 0) {
-		}
-		if (dict.contains(s)) {
-			return true;
-		}
-
-		int i = 1;
-		while (i < s.length()) {
-			if (dict.contains(s.substring(0, i)) && wordBreakNaive(s.substring(i), dict)) {
-				return true;
-			}
-			i++;
-		}
-		return false;
-	}
 
 	/**
 	 * dp solution

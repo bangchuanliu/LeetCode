@@ -5,12 +5,10 @@ import java.util.Map;
 
 /**
  * Given a roman numeral, convert it to an integer.
- * 
+ * <p>
  * Input is guaranteed to be within the range from 1 to 3999.
- * 
- * 
- * @author BangChuan Liu <liubangchuan1100@gmail.com>
  *
+ * @author BangChuan Liu <liubangchuan1100@gmail.com>
  * @date Oct 29, 2014
  */
 public class RomanToInteger {
@@ -33,10 +31,10 @@ public class RomanToInteger {
 		int pre = num;
 		for (int i = 1; i < s.length(); i++) {
 			int cur = map.get(s.charAt(i));
-			if (cur <= pre) {
-				num += cur;
-			} else {
-				num += cur - 2 * pre;
+			num += cur;
+
+			if (cur > pre) {
+				num -= 2 * pre;
 			}
 			pre = cur;
 		}
